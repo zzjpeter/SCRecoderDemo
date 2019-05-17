@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CommonCrypto/CommonDigest.h>
 
 #define rootFolder @"SCImageChache"
 #define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches"]
@@ -88,5 +89,35 @@
 + (BOOL)saveCacheDataOnCurThread:(id)data folderPath:(NSString *)folderPath fileName:(NSString *)fileName;
 #pragma mark -取本地数据
 + (id)getCacheDataByFolderPath:(NSString *)folderPath fileName:(NSString *)fileName;
+
+#pragma mark C方式 获取app常用文件路径 Document、Cache、Temp
+
+/**
+ * @brief 获取Document下文件路径
+ */
+NSString * pathdwf(NSString *, ...);
+
+/**
+ * @brief 获取Cache下文件路径
+ */
+NSString * pathcwf(NSString *, ...);
+
+/**
+ * @brief 获取Temp下文件路径
+ */
+NSString * pathtwf(NSString *, ...);
+
+/**
+ * @brief GUID
+ */
+NSString * uuid(void);
+
+/**
+ * @brief 以当前时间获得一个文件名
+ */
+NSString * dfn(NSString *);
+
+void runDispatchGetMainQueue(void (^block)(void));
+void runDispatchGetGlobalQueue(void (^block)(void));
 
 @end

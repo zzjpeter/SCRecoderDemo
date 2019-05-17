@@ -12,6 +12,7 @@
 #import "CommonConstant.h"//通用
 
 #import "SaveUtil.h"//存储
+#import "CacheManager.h"
 #import "ZCommonUtils.h"//常用
 
 #import "ZSingleton.h"//单例

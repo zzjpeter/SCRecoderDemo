@@ -450,4 +450,78 @@
     return mutableDic;
 }
 
+#pragma mark C方式 获取app常用文件路径 Document、Cache、Temp
+NSString * pathdwf(NSString *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    NSString *str = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    return [documentPath stringByAppendingPathComponent:str];
+}
+
+NSString * pathcwf(NSString *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    NSString *str = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    
+    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    return [cachePath stringByAppendingPathComponent:str];
+}
+
+NSString * pathtwf(NSString *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    NSString *str = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    
+    NSString *tempPath = NSTemporaryDirectory();
+    
+    return [tempPath stringByAppendingPathComponent:str];
+}
+
+NSString * uuid()
+{
+    CFUUIDRef   uuid_ref        = CFUUIDCreate(NULL);
+    CFStringRef uuid_string_ref = CFUUIDCreateString(NULL, uuid_ref);
+    
+    CFRelease(uuid_ref);
+    
+    NSString *uuid = [NSString stringWithString:(__bridge NSString*)uuid_string_ref];
+    
+    CFRelease(uuid_string_ref);
+    
+    return uuid;
+}
+
+NSString * dfn(NSString *ext)
+{
+    return [NSString stringWithFormat:@"%f.%@", [[NSDate date] timeIntervalSince1970], ext];
+}
+
+void runDispatchGetMainQueue(void (^block)(void))
+{
+    if ([NSThread isMainThread])
+    {
+        block();
+    }
+    else
+    {
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
+}
+
+void runDispatchGetGlobalQueue(void (^block)(void))
+{
+    dispatch_queue_t dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(dispatchQueue, block);
+}
+
 @end

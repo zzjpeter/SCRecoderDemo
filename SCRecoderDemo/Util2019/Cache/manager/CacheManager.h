@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CacheHelper.h"
 
 @interface CacheManager : NSObject
 

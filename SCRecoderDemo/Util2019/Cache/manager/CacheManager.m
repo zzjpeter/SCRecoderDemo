@@ -7,7 +7,6 @@
 //
 
 #import "CacheManager.h"
-#import "CacheHelper.h"
 
 @interface CacheManager()
 
