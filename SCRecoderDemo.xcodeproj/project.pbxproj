@@ -39,6 +39,7 @@
 		47D4D07C228E964400A8B840 /* ZCommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D053228E964400A8B840 /* ZCommonUtils.m */; };
 		47D4D07D228E964400A8B840 /* JumpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D056228E964400A8B840 /* JumpManager.m */; };
 		47D4D07E228E964400A8B840 /* SaveUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D05E228E964400A8B840 /* SaveUtil.m */; };
+		47D4D081228E96FC00A8B840 /* ScreenCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D080228E96FC00A8B840 /* ScreenCapture.m */; };
 		47E8EE4F228E4DD3005407D4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8EE4E228E4DD3005407D4 /* AppDelegate.m */; };
 		47E8EE52228E4DD3005407D4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8EE51228E4DD3005407D4 /* ViewController.m */; };
 		47E8EE55228E4DD3005407D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E8EE53228E4DD3005407D4 /* Main.storyboard */; };
@@ -121,6 +122,9 @@
 		47D4D05B228E964400A8B840 /* ColorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMacro.h; sourceTree = "<group>"; };
 		47D4D05D228E964400A8B840 /* SaveUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveUtil.h; sourceTree = "<group>"; };
 		47D4D05E228E964400A8B840 /* SaveUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveUtil.m; sourceTree = "<group>"; };
+		47D4D07F228E96FC00A8B840 /* ScreenCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenCapture.h; sourceTree = "<group>"; };
+		47D4D080228E96FC00A8B840 /* ScreenCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenCapture.m; sourceTree = "<group>"; };
+		47D4D082228E9ED700A8B840 /* PCHheader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PCHheader.pch; sourceTree = "<group>"; };
 		47E8EE4A228E4DD3005407D4 /* SCRecoderDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCRecoderDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47E8EE4D228E4DD3005407D4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		47E8EE4E228E4DD3005407D4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -160,6 +164,8 @@
 		47D4D007228E961400A8B840 /* Record */ = {
 			isa = PBXGroup;
 			children = (
+				47D4D07F228E96FC00A8B840 /* ScreenCapture.h */,
+				47D4D080228E96FC00A8B840 /* ScreenCapture.m */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -191,8 +197,8 @@
 		47D4D00C228E964400A8B840 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				47D4D00D228E964400A8B840 /* CacheHelper.m */,
 				47D4D00E228E964400A8B840 /* CacheHelper.h */,
+				47D4D00D228E964400A8B840 /* CacheHelper.m */,
 				47D4D00F228E964400A8B840 /* manager */,
 			);
 			path = Cache;
@@ -387,6 +393,7 @@
 				47E8EE58228E4DD5005407D4 /* LaunchScreen.storyboard */,
 				47E8EE5B228E4DD5005407D4 /* Info.plist */,
 				47E8EE5C228E4DD5005407D4 /* main.m */,
+				47D4D082228E9ED700A8B840 /* PCHheader.pch */,
 			);
 			path = SCRecoderDemo;
 			sourceTree = "<group>";
@@ -505,6 +512,7 @@
 				47D4D07E228E964400A8B840 /* SaveUtil.m in Sources */,
 				47D4D06E228E964400A8B840 /* UIButton+TTAdd.m in Sources */,
 				47D4D06A228E964400A8B840 /* NSString+Money.m in Sources */,
+				47D4D081228E96FC00A8B840 /* ScreenCapture.m in Sources */,
 				47D4D073228E964400A8B840 /* UIImage+TTAdd.m in Sources */,
 				47D4D070228E964400A8B840 /* UITableView+iOS11.m in Sources */,
 				47D4D06C228E964400A8B840 /* NSString+Empty.m in Sources */,
