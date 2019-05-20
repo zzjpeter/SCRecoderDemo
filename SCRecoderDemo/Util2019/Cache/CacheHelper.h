@@ -14,6 +14,14 @@
 //讲义图片
 #define CachePath    [DOCUMENTS_FOLDER stringByAppendingPathComponent:@"/SCImageUnderlyingCache"]
 
+typedef NS_ENUM(NSUInteger, SourceType) {
+    SourceTypeIMAGE_JPG = 1,
+    SourceTypeIMAGE_PNG,
+    SourceTypeVOICE_MP3,
+    SourceTypeVOICE_CAF,
+    SourceTypeVIDEO_MP4,
+};
+
 @class ArchivesMessageObj;
 
 @interface CacheHelper : NSObject
@@ -118,5 +126,9 @@ NSString * dfn(NSString *);
 
 void runDispatchGetMainQueue(void (^block)(void));
 void runDispatchGetGlobalQueue(void (^block)(void));
+
+#pragma mark 文件通用存储位置
+//所有基础文件的保存路径
++(NSString*)pathForCommonFile:(NSString *)fileName withType:(NSInteger)fileType;
 
 @end

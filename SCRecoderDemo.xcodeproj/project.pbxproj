@@ -79,6 +79,8 @@
 		47F1EE0422926BAB0037591D /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F1EDD522926BAB0037591D /* libx264.a */; };
 		47F1EE0522926BAB0037591D /* librtmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F1EDDD22926BAB0037591D /* librtmp.a */; };
 		47F1EE0622926BAB0037591D /* libyuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F1EDF522926BAB0037591D /* libyuv.a */; };
+		47F1EE092292751C0037591D /* RecordAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F1EE082292751C0037591D /* RecordAudio.m */; };
+		47F1EE0C2292854E0037591D /* IMRecordToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F1EE0B2292854E0037591D /* IMRecordToolKit.m */; };
 		E3924DB022B7A0FC1AE0AC05 /* libPods-SCRecoderDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA6D0654B6F4A4A8B1253CC /* libPods-SCRecoderDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -364,6 +366,10 @@
 		47F1EDF222926BAB0037591D /* rotate_argb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rotate_argb.h; sourceTree = "<group>"; };
 		47F1EDF322926BAB0037591D /* row.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = row.h; sourceTree = "<group>"; };
 		47F1EDF522926BAB0037591D /* libyuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libyuv.a; sourceTree = "<group>"; };
+		47F1EE072292751C0037591D /* RecordAudio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordAudio.h; sourceTree = "<group>"; };
+		47F1EE082292751C0037591D /* RecordAudio.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordAudio.m; sourceTree = "<group>"; };
+		47F1EE0A2292854E0037591D /* IMRecordToolKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMRecordToolKit.h; sourceTree = "<group>"; };
+		47F1EE0B2292854E0037591D /* IMRecordToolKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMRecordToolKit.m; sourceTree = "<group>"; };
 		A0E9860F8216D8BC18711FDF /* Pods-SCRecoderDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SCRecoderDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-SCRecoderDemo/Pods-SCRecoderDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F062F7B08BFB128FE0C8B466 /* Pods-SCRecoderDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SCRecoderDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SCRecoderDemo/Pods-SCRecoderDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		FAA6D0654B6F4A4A8B1253CC /* libPods-SCRecoderDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SCRecoderDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,6 +414,10 @@
 			children = (
 				47D4D07F228E96FC00A8B840 /* ScreenCapture.h */,
 				47D4D080228E96FC00A8B840 /* ScreenCapture.m */,
+				47F1EE072292751C0037591D /* RecordAudio.h */,
+				47F1EE082292751C0037591D /* RecordAudio.m */,
+				47F1EE0A2292854E0037591D /* IMRecordToolKit.h */,
+				47F1EE0B2292854E0037591D /* IMRecordToolKit.m */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -1294,6 +1304,7 @@
 				47F1ED952292564E0037591D /* cmdutils.c in Sources */,
 				47F1ED962292564E0037591D /* ffmpeg.c in Sources */,
 				47F1EE0222926BAB0037591D /* aw_array.c in Sources */,
+				47F1EE092292751C0037591D /* RecordAudio.m in Sources */,
 				47E8EE5D228E4DD5005407D4 /* main.m in Sources */,
 				47F1EDF922926BAB0037591D /* aw_x264.c in Sources */,
 				47D4D068228E964400A8B840 /* NSString+EncodeUrl.m in Sources */,
@@ -1306,6 +1317,7 @@
 				47F1EDA02292564E0037591D /* FFmpegConverOC.m in Sources */,
 				47D4D075228E964400A8B840 /* TTButtonExtend.m in Sources */,
 				47F1EDF722926BAB0037591D /* aw_sw_x264_encoder.c in Sources */,
+				47F1EE0C2292854E0037591D /* IMRecordToolKit.m in Sources */,
 				47D4D06D228E964400A8B840 /* UIView+FrameExtension.m in Sources */,
 				47D4D064228E964400A8B840 /* VerticalLabel.m in Sources */,
 			);

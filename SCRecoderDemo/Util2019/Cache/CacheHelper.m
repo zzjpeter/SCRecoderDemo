@@ -524,4 +524,58 @@ void runDispatchGetGlobalQueue(void (^block)(void))
     dispatch_async(dispatchQueue, block);
 }
 
+#pragma mark 文件通用存储位置
+//所有基础文件的保存路径
++(NSString*)pathForCommonFile:(NSString *)fileName withType:(NSInteger)fileType{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *commonDirectory = [documentsDirectory stringByAppendingPathComponent:@"commonFile"];
+    
+    BOOL isDir;
+    NSError* error;
+    NSFileManager *fileManager= [NSFileManager defaultManager];
+    if(![fileManager fileExistsAtPath:commonDirectory isDirectory:&isDir]){
+        if (![fileManager createDirectoryAtPath:commonDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
+            NSLog(@"can not create common directory");
+            return nil;
+        }
+    }
+    
+    NSString* tempPath;
+    
+    switch (fileType) {
+        case SourceTypeIMAGE_JPG:{
+            tempPath =  [NSString stringWithFormat:@"%@/commonfile_%@.jpg",commonDirectory,fileName];
+            break;
+        }
+        case SourceTypeIMAGE_PNG:{
+            tempPath =  [NSString stringWithFormat:@"%@/commonfile_%@.png",commonDirectory,fileName];
+            break;
+        }
+        case SourceTypeVOICE_MP3:{
+            if ([fileName hasSuffix:@"mp3"]) {
+                tempPath = [NSString stringWithFormat:@"%@/commonfile_%@",commonDirectory,fileName];
+            } else {
+                tempPath = [NSString stringWithFormat:@"%@/commonfile_%@.mp3",commonDirectory,fileName];
+            }
+            break;
+        }
+        case SourceTypeVOICE_CAF:{
+            tempPath =  [NSString stringWithFormat:@"%@/commonfile_%@.caf",commonDirectory,fileName];
+            break;
+        }
+        case SourceTypeVIDEO_MP4:{
+            if ([fileName hasSuffix:@"mp4"]) {
+                tempPath = [NSString stringWithFormat:@"%@/commonfile_%@",commonDirectory,fileName];
+            } else {
+                tempPath = [NSString stringWithFormat:@"%@/commonfile_%@.mp4",commonDirectory,fileName];
+            }
+            break;
+        }
+        default:
+            tempPath =  [NSString stringWithFormat:@"%@/commonfile_%@",commonDirectory,fileName];
+    }
+    return tempPath;
+}
+
 @end

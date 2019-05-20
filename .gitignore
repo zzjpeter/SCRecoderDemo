@@ -1060,3 +1060,8 @@ Pods/Pods.xcodeproj/xcuserdata/zhuzhijia.xcuserdatad/xcschemes/GPUImage.xcscheme
 Pods/Target Support Files/GPUImage/GPUImage-dummy.m
 Pods/Target Support Files/GPUImage/GPUImage-prefix.pch
 Pods/Target Support Files/GPUImage/GPUImage.xcconfig
+Pods/Headers/Public/mp3lame-for-ios/lame/lame.h
+Pods/mp3lame-for-ios/LICENSE
+Pods/mp3lame-for-ios/README.md
+Pods/mp3lame-for-ios/lame.framework/lame
+Pods/mp3lame-for-ios/lame.framework/Headers/lame.h
