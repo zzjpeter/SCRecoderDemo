@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47AC11A622929BAE00D88279 /* AVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AC11A522929BAE00D88279 /* AVUtil.m */; };
 		47D4D05F228E964400A8B840 /* UrlLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D00A228E964400A8B840 /* UrlLabel.m */; };
 		47D4D060228E964400A8B840 /* CacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D00D228E964400A8B840 /* CacheHelper.m */; };
 		47D4D061228E964400A8B840 /* CacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D011228E964400A8B840 /* CacheManager.m */; };
@@ -85,6 +86,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47AC11A422929BAE00D88279 /* AVUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVUtil.h; sourceTree = "<group>"; };
+		47AC11A522929BAE00D88279 /* AVUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVUtil.m; sourceTree = "<group>"; };
 		47D4D00A228E964400A8B840 /* UrlLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlLabel.m; sourceTree = "<group>"; };
 		47D4D00B228E964400A8B840 /* UrlLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlLabel.h; sourceTree = "<group>"; };
 		47D4D00D228E964400A8B840 /* CacheHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheHelper.m; sourceTree = "<group>"; };
@@ -418,6 +421,8 @@
 				47F1EE082292751C0037591D /* RecordAudio.m */,
 				47F1EE0A2292854E0037591D /* IMRecordToolKit.h */,
 				47F1EE0B2292854E0037591D /* IMRecordToolKit.m */,
+				47AC11A422929BAE00D88279 /* AVUtil.h */,
+				47AC11A522929BAE00D88279 /* AVUtil.m */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -1310,6 +1315,7 @@
 				47D4D068228E964400A8B840 /* NSString+EncodeUrl.m in Sources */,
 				47F1EDFB22926BAB0037591D /* aw_streamer.c in Sources */,
 				47F1EE0122926BAB0037591D /* aw_dict.c in Sources */,
+				47AC11A622929BAE00D88279 /* AVUtil.m in Sources */,
 				47D4D061228E964400A8B840 /* CacheManager.m in Sources */,
 				47D4D07C228E964400A8B840 /* ZCommonUtils.m in Sources */,
 				47E8EE4F228E4DD3005407D4 /* AppDelegate.m in Sources */,
