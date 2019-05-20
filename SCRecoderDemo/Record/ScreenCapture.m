@@ -9,15 +9,12 @@
 #import "ScreenCapture.h"
 #import "ZHeader.h"
 
+#import "libyuv.h"
+#include "aw_all.h"
+
 @interface ScreenCapture ()
 
-@property (nonatomic,strong) NSMutableArray * userImageArray;
-
 @property (nonatomic,strong) NSTimer * screenTimer;
-
-@property (nonatomic,strong) NSOperationQueue * operationQueue;
-
-@property (nonatomic,strong) NSBlockOperation * blockOperation;
 
 @end
 
@@ -33,8 +30,7 @@
         self.frameRate   = 5;
         self.duration    = 60;
         _cacheVideoPath = pathcwf(@"player/video.mov");
-        unlink([_cacheVideoPath UTF8String]);
-        
+        unlink([_cacheVideoPath UTF8String]);//unlink命令用于系统调用函数unlink去删除指定的文件。和rm命令作用一样。
         [self prepareToRecord];
     }
     return self;
@@ -43,7 +39,7 @@
 -(instancetype)initWithVideoPath:(NSString*)videoPath {
     self = [super init];
     if (self) {
-        //*2 for scaling
+        // for scaling
         self.videoWidth  = [UIScreen mainScreen].bounds.size.width;
         self.videoHeight = [UIScreen mainScreen].bounds.size.height;
         self.frameRate   = 15;
@@ -69,10 +65,12 @@
             NSLog(@"%@", [NSString stringWithFormat:@"%@:%@",@"录屏",@"录屏准备失败"]);
             return NO;
         }
+        //写入视频大小
         NSInteger numPixels = self.videoWidth * self.videoHeight;
+        //每像素比特
         CGFloat bitsPerPiex = 6.0;
         NSInteger bitsPerSecond = numPixels * bitsPerPiex;
-        
+        // 码率和帧率设置
         NSDictionary *comperssion  = @{
                                        AVVideoAverageBitRateKey : @(bitsPerSecond),
                                        AVVideoExpectedSourceFrameRateKey : @(10),
@@ -89,7 +87,7 @@
         input = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings];
         input.expectsMediaDataInRealTime = YES;
         
-        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:kCVPixelFormatType_32ARGB],kCVPixelBufferPixelFormatTypeKey, nil];
+        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:kCVPixelFormatType_32ARGB], kCVPixelBufferPixelFormatTypeKey, nil];
         
         AVAssetWriterInputPixelBufferAdaptor *adaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:input sourcePixelBufferAttributes:attributes];
         
@@ -98,11 +96,11 @@
         }else {
             NSLog(@"%@",[NSString stringWithFormat:@"%@:%@",@"录屏",@"writerInput失败"]);
         }
-        _assetWriter = writer;
-        _assetWriterInput = input;
-        _wVideoAdaptor = adaptor;
-        _ready = YES;
-        _videoSettings = videoSettings;
+        _assetWriter        = writer;
+        _assetWriterInput   = input;
+        _wVideoAdaptor      = adaptor;
+        _ready              = YES;
+        _videoSettings      = videoSettings;
         [_assetWriter startWriting];
         [_assetWriter startSessionAtSourceTime:kCMTimeZero];
     }
@@ -110,7 +108,8 @@
     return YES;
 }
 
-- (void)start {
+- (void)start
+{
     self.isRecordFile = YES;
     
     if(_ready && !_recording) {
@@ -124,7 +123,7 @@
 - (void)pause {
     if (_recording) {
         _recording = NO;
-        _durationCounter += [self getElapsed];
+        _durationCounter += [self getElapsed];//有效录频时长
     }
 }
 
@@ -135,7 +134,7 @@
         [self pause];
         [self releaseTimer:_screenTimer];
         [_assetWriterInput markAsFinished];
-        CMTime elapsed = CMTimeMake((int)([self getElapsed] + _durationCounter) * 1000, 1000);
+        CMTime elapsed = CMTimeMake((int)(_durationCounter) * 1000, 1000);
         [_assetWriter endSessionAtSourceTime:elapsed];
         @weakify(self)
         [_assetWriter finishWritingWithCompletionHandler:^{
@@ -151,7 +150,8 @@
 }
 
 #pragma mark private
-- (void)threadHandler {
+- (void)threadHandler
+{
     if (@available(iOS 10.0, *)) {
         [self screenTimer];
     }else {
@@ -162,7 +162,7 @@
 - (NSTimer *)screenTimer {
     if(!_screenTimer){
         @weakify(self)
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1/self.frameRate block:^(NSTimer * _Nonnull timer) {
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / self.frameRate block:^(NSTimer * _Nonnull timer) {
             @strongify(self)
             if (self->_recording == YES) {
                 [self videoWriterTimerHandler:nil];
@@ -180,27 +180,13 @@
     timer = nil;
 }
 
-- (double)getElapsed
-{
-    mach_timebase_info_data_t info;
-    mach_timebase_info(&info);
-    uint64_t timeInterval = mach_absolute_time() - _startAtNumber;
-    
-    timeInterval *= info.numer;
-    timeInterval /= info.denom;
-    
-    //纳秒转换为秒
-    float duration = (timeInterval * 1.0f) / 1000000000;
-    
-    return duration;
-}
-
 - (void)videoWriterTimerHandler:(NSTimer *)timer{
     if (_recording) {
         @autoreleasepool {
             CMTime elapsed = CMTimeMake((int)(([self getElapsed] + _durationCounter)*1000), 1000);
             UIImage *image = [self imageFromView:self.captureView];
             if (image) {
+                //CVPixelBufferRef buffer = [self yuvPixelBufferFromCGImage:image.CGImage elapsed:elapsed];
                 CVPixelBufferRef buffer = [self pixelBufferFromCGImage:image.CGImage];
                 if ([_assetWriterInput isReadyForMoreMediaData] && _recording) {
                     if (_wVideoAdaptor) {
@@ -234,7 +220,7 @@
                             return;
                         }else {
                             if ([self.delegate respondsToSelector:@selector(screenCaptureDidProgress:)]) {
-                                [self.delegate screenCaptureDidProgress:(CMTimeGetSeconds(elapsed) / self.duration)];
+                                [self.delegate screenCaptureDidProgress:progress];
                             }
                         }
                     }
@@ -245,6 +231,28 @@
     }
 }
 
+#pragma mark image to yuvdata to yuvPixelBuffer
+- (CVPixelBufferRef) yuvPixelBufferFromCGImage: (CGImageRef) image elapsed:(CMTime)elapsed {
+    CFDataRef pixelData = CGDataProviderCopyData(CGImageGetDataProvider(image));
+    const u_int8_t *data = CFDataGetBytePtr(pixelData);
+    int width =  (int)CGImageGetWidth(image);
+    width = aw_stride(width);
+    int height = (int)CGImageGetHeight(image);
+    //宽*高
+    int w_x_h = width * height;
+    //yuv数据长度 = (宽 * 高) * 3 / 2
+    int yuv_len = w_x_h * 3 / 2;
+    //yuv数据
+    u_int8_t *yuv_bytes = malloc(yuv_len);
+    //ARGBToNV12这个函数是libyuv这个第三方库提供的一个将bgra图片转为yuv420格式的一个函数。
+    //libyuv是google提供的高性能的图片转码操作。支持大量关于图片的各种高效操作，是视频推流不可缺少的重要组件，你值得拥有。
+    ARGBToNV12(data, width * 4, yuv_bytes, width, yuv_bytes + w_x_h, width, width, height);
+    NSData *yuvData = [NSData dataWithBytesNoCopy:yuv_bytes length:yuv_len];
+    CVPixelBufferRef buffer = [self yuvPixelBufferWithData:yuvData presentationTime:elapsed width:width heigth:height];
+    
+    return buffer;
+}
+#pragma mark yuvdata to yuvPixelBuffer
 static OSType KVideoPixelFormatType = kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange;
 - (CVPixelBufferRef)yuvPixelBufferWithData:(NSData *)dataFrame
                           presentationTime:(CMTime)presentationTime
@@ -258,7 +266,7 @@ static OSType KVideoPixelFormatType = kCVPixelFormatType_420YpCbCr8BiPlanarVideo
 
 -(CVPixelBufferRef)copyDataFromBuffer:(const unsigned char*)buffer toYUVPixelBufferWithWidth:(size_t)w Height:(size_t)h
 {
-    NSDictionary *pixelBufferAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSDictionary dictionary],kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey, nil];
+    NSDictionary *pixelBufferAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSDictionary dictionary],kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey, nil];
     CVPixelBufferRef pixelBuffer;
     CVPixelBufferCreate(NULL, w, h, KVideoPixelFormatType, (__bridge CFDictionaryRef)(pixelBufferAttributes), &pixelBuffer);
     
@@ -273,8 +281,17 @@ static OSType KVideoPixelFormatType = kCVPixelFormatType_420YpCbCr8BiPlanarVideo
     }
     
     d = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
+    dst = (unsigned char *)CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
+    h = h >> 1;
+    for (unsigned int rIdx = 0; rIdx < h; ++rIdx, dst += d, src += w ) {
+         memcpy(dst, src, w);
+    }
+    
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    
+    return pixelBuffer;
 }
-
+#pragma mark -image to pixelbuffer
 - (CVPixelBufferRef) pixelBufferFromCGImage: (CGImageRef) image
 {
     CVPixelBufferRef pxbuffer = NULL;
@@ -331,6 +348,31 @@ static OSType KVideoPixelFormatType = kCVPixelFormatType_420YpCbCr8BiPlanarVideo
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+
+#pragma mark 时间差
+- (double)getElapsed
+{
+    return elapsedTimes(_startAtNumber, mach_absolute_time());
+}
+
+double elapsedTimes(u_int64_t startTime, u_int64_t endTime)
+{
+    uint64_t timeInterval = endTime - startTime;
+    
+    mach_timebase_info_data_t info;
+    kern_return_t err = mach_timebase_info(&info);
+
+    //convert the timebase from nanosecond into seconds
+    double coversionRatio = 0.0;
+    if (err == 0) {
+        coversionRatio = 1e-9 * (double)info.numer / (double)info.denom;
+    }
+    
+    //纳秒转换为秒
+    double duration = timeInterval * coversionRatio;
+    
+    return duration;
 }
 
 @end

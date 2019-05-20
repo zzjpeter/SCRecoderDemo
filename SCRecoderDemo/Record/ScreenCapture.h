@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat videoHeight;
 @property (nonatomic, assign) CGFloat duration;
 @property (nonatomic, assign) NSInteger frameRate;
-@property (nonatomic, assign, readonly) double durationCounter;
+@property (nonatomic, assign, readonly) double durationCounter;//有效录频时长 单位s
 @property (nonatomic, assign) BOOL isRecordFile;
 
 @property (nonatomic, weak) id<ScreenCaptureDelegate> delegate;
