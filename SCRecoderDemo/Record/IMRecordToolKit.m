@@ -15,6 +15,11 @@
 
 @property (nonatomic, strong) AVAudioRecorder *recorder;
 @property (nonatomic, strong) NSString *tempString;
+/**
+ *  参数配置
+ */
+@property (nonatomic, strong) NSDictionary *settings;
+@property (nonatomic, strong) NSString *outputString;
 
 @end
 
@@ -24,6 +29,7 @@
 {
     self = [super init];
     if (self) {
+        [IMRecordToolKit setupAudioSession];
         NSDictionary *recordSetting = @{AVSampleRateKey : @(44100),//采样率
                                         AVFormatIDKey : @(kAudioFormatLinearPCM),
                                         AVLinearPCMBitDepthKey : @(16),//采样位数 默认 16
@@ -37,34 +43,59 @@
 
 - (void)start
 {
-    NSString *audioPath = [CacheHelper pathForCommonFile:@"audio" withType:SourceTypeVOICE_CAF];
+    NSString *audioPath = [CacheHelper pathForCommonFile:@"audio" withType:0];
     [self startWithPath:audioPath];
 }
 
 - (void)startWithPath:(NSString *)audioPath
 {
-    if (self.runing) {
+    [self startWithPath:audioPath outputString:[CacheHelper pathForCommonFile:@"audio" withType:SourceTypeVOICE_MP3] timeInterval:0];
+}
+
+- (void)startWithPath:(NSString *)audioPath outputString:(NSString *)outputString timeInterval:(NSTimeInterval)timeInterval
+{
+    if (_recorder.isRecording) {
         NSLog(@"录音进行中....");
         return;
     }
+    if (IsEmpty(audioPath)) {
+        NSLog(@"文件临时存储位置未设置");
+        return;
+    }
+    if (IsEmpty(outputString)) {
+        NSLog(@"文件输出存储位置未设置");
+        return;
+    }
     NSError *error = nil;
-    self.runing = YES;
     self.tempString = audioPath;
-    self.outputString = [CacheHelper pathForCommonFile:@"audio" withType:SourceTypeVOICE_MP3];
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:audioPath] settings:self.settings error:&error];
+    self.outputString = outputString;
+    _recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:audioPath] settings:self.settings error:&error];
     if (error) {
         NSLog(@"%@", error);
     }
-    self.recorder.delegate = self;
-    if ([self.recorder prepareToRecord]) {
-        [self.recorder record];
+    _recorder.delegate = self;
+    if ([_recorder prepareToRecord]) {
+        if (!timeInterval) {
+            [_recorder record];
+        }else
+        {
+            [_recorder recordAtTime:timeInterval];
+        }
+    }
+}
+
+- (void)pause
+{
+    if ([_recorder isRecording]) {
+        [_recorder pause];
     }
 }
 
 - (void)finished
 {
-    if (self.runing) {
-        [self.recorder stop];
+    if (_recorder.isRecording) {
+        [_recorder stop];
+        _recorder = nil;
     }
 }
 
@@ -78,7 +109,6 @@
     [self finished];
     _recorder = nil;
     _tempString = nil;
-    _runing = NO;
 }
 
 #pragma mark private
@@ -91,7 +121,7 @@
     }
     return NO;
 }
-
+#pragma mark 必须在开始录制之前调用来设置，否则音频录制无效
 + (void)setupAudioSession
 {
     NSError *error = nil;
@@ -126,9 +156,7 @@
         }
         return;
     }
-    AVURLAsset *audioAsset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:self.tempString] options:nil];
-    CMTime audioDuration = audioAsset.duration;
-    NSLog(@"%f", CMTimeGetSeconds(audioDuration));
+
     @try {
         int read, write;
         FILE *pcm = fopen([self.tempString cStringUsingEncoding:NSASCIIStringEncoding], "rb");//source 被转换的音频文件位置
@@ -139,7 +167,7 @@
             const int MP3_SIZE = 8192;
             short int pcm_buffer[PCM_SIZE * 2];
             unsigned char mp3_buffer[MP3_SIZE];
-            
+
             lame_t lame = lame_init();
             lame_set_num_channels(lame, 2);//设置1为单通道，默认为2双通道
             lame_set_in_samplerate(lame, 44100);//11025.0
@@ -148,7 +176,7 @@
             lame_set_mode(lame, 3);
             lame_set_quality(lame, 7);/* 2=high 5 = medium 7=low 音质*/
             lame_init_params(lame);
-            
+
             do {
                 read = (int)fread(pcm_buffer, 2 * sizeof(short int), PCM_SIZE, pcm);
                 if (read == 0) {
@@ -158,15 +186,19 @@
                 }
                 fwrite(mp3_buffer, write, 1, mp3);
             } while (read != 0);
-            
+
             lame_close(lame);
             fclose(mp3);
             fclose(pcm);
-            
+//#warning duration必须是mp3文件 才能通过下面的方式正确的获取 音频文件时长
+            AVURLAsset *audioAsset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:self.outputString] options:nil];
+            CMTime audioDuration = audioAsset.duration;
+            NSLog(@"%f", CMTimeGetSeconds(audioDuration));
+
             if ([self.delegate respondsToSelector:@selector(IMRecordToolkitDidFinished:duration:)]) {
                 [self.delegate IMRecordToolkitDidFinished:self duration:CMTimeGetSeconds(audioDuration)];
             }
-            
+
             unlink([self.tempString UTF8String]);
         }
     } @catch (NSException *exception) {

@@ -1495,7 +1495,7 @@
 					"$(PROJECT_DIR)/SCRecoderDemo/clibs/3th-party/librtmp/lib",
 					"$(PROJECT_DIR)/SCRecoderDemo/clibs/3th-party/libyuv/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zzj.test2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zzj.test3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1531,7 +1531,7 @@
 					"$(PROJECT_DIR)/SCRecoderDemo/clibs/3th-party/librtmp/lib",
 					"$(PROJECT_DIR)/SCRecoderDemo/clibs/3th-party/libyuv/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zzj.test2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zzj.test3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

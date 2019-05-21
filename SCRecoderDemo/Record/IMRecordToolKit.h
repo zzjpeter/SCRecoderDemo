@@ -23,12 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface IMRecordToolKit : NSObject
 
-@property (nonatomic, assign) BOOL runing;
-/**
- *  参数配置
- */
-@property (nonatomic, strong) NSDictionary *settings;
-@property (nonatomic, strong) NSString *outputString;
 /**
  *  委托
  */
@@ -47,7 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)start;
 - (void)startWithPath:(NSString *)audioPath;
+- (void)startWithPath:(NSString *)audioPath outputString:(NSString *)outputString timeInterval:(NSTimeInterval)timeInterval;
 
+- (void)pause;
 /**
  *  结束录制
  */

@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "ScreenCapture.h"
+#import "IMRecordToolKit.h"
+#import "RecordAudio.h"
 #import "ZHeader.h"
 
 @interface ViewController ()<ScreenCaptureDelegate>
@@ -17,7 +19,8 @@
 @property (nonatomic,copy) NSString *videoPath;
 @property (nonatomic,strong) UIView *screenCaptureView;
 
-
+//audiorecord
+@property (nonatomic,strong) IMRecordToolKit *audioRecord;
 
 @end
 
@@ -37,6 +40,12 @@
 
 - (IBAction)videoRecordAction:(id)sender {
     [self testVideoRecord];
+}
+- (IBAction)audioRecordAction:(id)sender {
+    [self testAudioRecord];
+}
+- (IBAction)stopAudioRecordAction:(id)sender {
+    [_audioRecord finished];
 }
 
 #pragma mark -test capture 录屏测试
@@ -96,5 +105,38 @@
     NSLog(@"%@##%@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
 
+#pragma mark -test audiorecord 录音测试
+- (void)testAudioRecord
+{
+    [self addAudioVideo:nil];
+}
+
+-(void)addAudioVideo:(NSString*)audioPath {
+    
+    if (_audioRecord != nil) {
+        _audioRecord = nil;
+    }
+    [self.audioRecord start];
+}
+
+- (IMRecordToolKit *)audioRecord
+{
+    if (!_audioRecord) {
+        IMRecordToolKit *audioRecord = [[IMRecordToolKit alloc] init];
+        _audioRecord = audioRecord;
+    }
+    return _audioRecord;
+}
+
+#pragma mark IMRecordToolkitDelegate
+
+- (void)IMRecordToolkitDidFinished:(id)sender duration:(CGFloat)duration
+{
+    NSLog(@"%@##%@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
+}
+- (void)IMRecordToolkitDidError:(NSError *_Nullable)error
+{
+    NSLog(@"%@##%@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
+}
 
 @end

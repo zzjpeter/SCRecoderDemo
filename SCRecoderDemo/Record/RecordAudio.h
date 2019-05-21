@@ -11,17 +11,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol RecordToolkitDelegate <NSObject>
+
+- (void)RecordToolkitDidFinished:(id)sender duration:(CGFloat)duration;
+- (void)RecordToolkitDidError:(NSError *_Nullable)error;
+
+@end
+
 @interface RecordAudio : NSObject
-{
-    AVAudioRecorder *_record;
-    NSString *_cacheAudioPath;
-}
 
-- (id)initWithAudioPath:(NSString *)audioPath;
+@property (nonatomic, weak) id<RecordToolkitDelegate> delegate;
+@property (nonatomic,strong) NSMutableDictionary *settings;
+@property (nonatomic,copy) NSString *tempString;//临时存储路径
 
-- (void)start:(NSTimeInterval)timeInterval;
+- (void)start;
+- (void)startWithPath:(NSString *)audioPath;
+- (void)startWithPath:(NSString *)audioPath timeInterval:(NSTimeInterval)timeInterval;
 - (void)pause;
-- (void)finishedRecord;
+- (void)finished;
 
 @end
 
