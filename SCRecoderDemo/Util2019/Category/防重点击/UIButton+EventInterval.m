@@ -6,13 +6,15 @@
 //  Copyright © 2016年 iMac. All rights reserved.
 //
 
-#import "UIButton+touch.h"
+#import "UIButton+EventInterval.h"
 #import <objc/runtime.h>
+
 @interface UIButton()
 /**bool 类型 YES 不允许点击   NO 允许点击   设置是否执行点UI方法*/
 @property (nonatomic, assign) BOOL isIgnoreEvent;
 @end
-@implementation UIButton (touch)
+
+@implementation UIButton (EventInterval)
 + (void)load{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -55,6 +57,7 @@
     //此处 methodA和methodB方法IMP互换了，实际上执行 sendAction；所以不会死循环
     self.isIgnoreEvent = YES;
     [self mySendAction:action to:target forEvent:event];
+    NSLog(@"%@##%@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
 //runtime 动态绑定 属性
 - (void)setIsIgnoreEvent:(BOOL)isIgnoreEvent{
