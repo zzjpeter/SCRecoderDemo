@@ -43,7 +43,7 @@
         self.videoWidth  = [UIScreen mainScreen].bounds.size.width;
         self.videoHeight = [UIScreen mainScreen].bounds.size.height;
         self.frameRate   = 15;
-        self.duration    = 5 * 60;
+        self.duration    = 1 * 60;//5 * 60;
         _cacheVideoPath = videoPath;
         unlink([_cacheVideoPath UTF8String]);
         [self prepareToRecord];
@@ -185,6 +185,7 @@
         @autoreleasepool {
             CMTime elapsed = CMTimeMake((int)(([self getElapsed] + _durationCounter)*1000), 1000);
             UIImage *image = [self imageFromView:self.captureView];
+            NSLog(@"captureView image:%@",image);
             if (image) {
                 //CVPixelBufferRef buffer = [self yuvPixelBufferFromCGImage:image.CGImage elapsed:elapsed];
                 CVPixelBufferRef buffer = [self pixelBufferFromCGImage:image.CGImage];
