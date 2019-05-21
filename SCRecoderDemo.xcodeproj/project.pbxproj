@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4709E7D22293E1EB00185D92 /* UIButton+EventInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 4709E7CF2293E1EB00185D92 /* UIButton+EventInterval.m */; };
 		47AC11A622929BAE00D88279 /* AVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AC11A522929BAE00D88279 /* AVUtil.m */; };
 		47D4D05F228E964400A8B840 /* UrlLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D00A228E964400A8B840 /* UrlLabel.m */; };
 		47D4D060228E964400A8B840 /* CacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D00D228E964400A8B840 /* CacheHelper.m */; };
@@ -33,8 +34,6 @@
 		47D4D075228E964400A8B840 /* TTButtonExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D037228E964400A8B840 /* TTButtonExtend.m */; };
 		47D4D076228E964400A8B840 /* UILabel+TTAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D039228E964400A8B840 /* UILabel+TTAdd.m */; };
 		47D4D077228E964400A8B840 /* NSArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D042228E964400A8B840 /* NSArray+Safe.m */; };
-		47D4D078228E964400A8B840 /* UIControl+UIControl_buttonCon.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D045228E964400A8B840 /* UIControl+UIControl_buttonCon.m */; };
-		47D4D079228E964400A8B840 /* UIButton+touch.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D046228E964400A8B840 /* UIButton+touch.m */; };
 		47D4D07A228E964400A8B840 /* LXFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D04C228E964400A8B840 /* LXFileManager.m */; };
 		47D4D07B228E964400A8B840 /* HelperUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D04D228E964400A8B840 /* HelperUtil.m */; };
 		47D4D07C228E964400A8B840 /* ZCommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D4D053228E964400A8B840 /* ZCommonUtils.m */; };
@@ -86,6 +85,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4709E7CD2293E1EB00185D92 /* UIButton+EventInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+EventInterval.h"; sourceTree = "<group>"; };
+		4709E7CF2293E1EB00185D92 /* UIButton+EventInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EventInterval.m"; sourceTree = "<group>"; };
 		47AC11A422929BAE00D88279 /* AVUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVUtil.h; sourceTree = "<group>"; };
 		47AC11A522929BAE00D88279 /* AVUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVUtil.m; sourceTree = "<group>"; };
 		47D4D00A228E964400A8B840 /* UrlLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlLabel.m; sourceTree = "<group>"; };
@@ -138,10 +139,6 @@
 		47D4D040228E964400A8B840 /* NSBundle+Language.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Language.h"; sourceTree = "<group>"; };
 		47D4D041228E964400A8B840 /* NSObject+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Util.h"; sourceTree = "<group>"; };
 		47D4D042228E964400A8B840 /* NSArray+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Safe.m"; sourceTree = "<group>"; };
-		47D4D044228E964400A8B840 /* UIButton+touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+touch.h"; sourceTree = "<group>"; };
-		47D4D045228E964400A8B840 /* UIControl+UIControl_buttonCon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+UIControl_buttonCon.m"; sourceTree = "<group>"; };
-		47D4D046228E964400A8B840 /* UIButton+touch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+touch.m"; sourceTree = "<group>"; };
-		47D4D047228E964400A8B840 /* UIControl+UIControl_buttonCon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+UIControl_buttonCon.h"; sourceTree = "<group>"; };
 		47D4D048228E964400A8B840 /* ZHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHeader.h; sourceTree = "<group>"; };
 		47D4D04B228E964400A8B840 /* HelperUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperUtil.h; sourceTree = "<group>"; };
 		47D4D04C228E964400A8B840 /* LXFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXFileManager.m; sourceTree = "<group>"; };
@@ -412,6 +409,30 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4709E7C42293E15900185D92 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				47D4D02D228E964400A8B840 /* VerticalLabel.h */,
+				47D4D018228E964400A8B840 /* VerticalLabel.m */,
+				47D4D041228E964400A8B840 /* NSObject+Util.h */,
+				47D4D01B228E964400A8B840 /* NSObject+Util.m */,
+				47D4D01A228E964400A8B840 /* NSArray+Safe.h */,
+				47D4D042228E964400A8B840 /* NSArray+Safe.m */,
+				47D4D019228E964400A8B840 /* UIView+FrameExtension.h */,
+				47D4D02C228E964400A8B840 /* UIView+FrameExtension.m */,
+			);
+			path = other;
+			sourceTree = "<group>";
+		};
+		4709E7CC2293E1EB00185D92 /* 防重点击 */ = {
+			isa = PBXGroup;
+			children = (
+				4709E7CD2293E1EB00185D92 /* UIButton+EventInterval.h */,
+				4709E7CF2293E1EB00185D92 /* UIButton+EventInterval.m */,
+			);
+			path = "防重点击";
+			sourceTree = "<group>";
+		};
 		47D4D007228E961400A8B840 /* Record */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,19 +494,12 @@
 		47D4D012228E964400A8B840 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				4709E7CC2293E1EB00185D92 /* 防重点击 */,
+				4709E7C42293E15900185D92 /* other */,
 				47D4D013228E964400A8B840 /* UIImage */,
-				47D4D018228E964400A8B840 /* VerticalLabel.m */,
-				47D4D019228E964400A8B840 /* UIView+FrameExtension.h */,
-				47D4D01A228E964400A8B840 /* NSArray+Safe.h */,
-				47D4D01B228E964400A8B840 /* NSObject+Util.m */,
 				47D4D01C228E964400A8B840 /* CountTime */,
 				47D4D01F228E964400A8B840 /* NSString */,
-				47D4D02C228E964400A8B840 /* UIView+FrameExtension.m */,
-				47D4D02D228E964400A8B840 /* VerticalLabel.h */,
 				47D4D02E228E964400A8B840 /* Fbee */,
-				47D4D041228E964400A8B840 /* NSObject+Util.h */,
-				47D4D042228E964400A8B840 /* NSArray+Safe.m */,
-				47D4D043228E964400A8B840 /* 防重点击 */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -552,17 +566,6 @@
 				47D4D040228E964400A8B840 /* NSBundle+Language.h */,
 			);
 			path = Fbee;
-			sourceTree = "<group>";
-		};
-		47D4D043228E964400A8B840 /* 防重点击 */ = {
-			isa = PBXGroup;
-			children = (
-				47D4D044228E964400A8B840 /* UIButton+touch.h */,
-				47D4D045228E964400A8B840 /* UIControl+UIControl_buttonCon.m */,
-				47D4D046228E964400A8B840 /* UIButton+touch.m */,
-				47D4D047228E964400A8B840 /* UIControl+UIControl_buttonCon.h */,
-			);
-			path = "防重点击";
 			sourceTree = "<group>";
 		};
 		47D4D049228E964400A8B840 /* Utils */ = {
@@ -642,11 +645,11 @@
 				47F1EDA522926BAB0037591D /* clibs */,
 				47F1ECFB2292564D0037591D /* FFmpeg-iOS */,
 				47D4D008228E964400A8B840 /* Util2019 */,
+				47D4D007228E961400A8B840 /* Record */,
 				47E8EE4D228E4DD3005407D4 /* AppDelegate.h */,
 				47E8EE4E228E4DD3005407D4 /* AppDelegate.m */,
 				47E8EE50228E4DD3005407D4 /* ViewController.h */,
 				47E8EE51228E4DD3005407D4 /* ViewController.m */,
-				47D4D007228E961400A8B840 /* Record */,
 				47E8EE53228E4DD3005407D4 /* Main.storyboard */,
 				47E8EE56228E4DD5005407D4 /* Assets.xcassets */,
 				47E8EE58228E4DD5005407D4 /* LaunchScreen.storyboard */,
@@ -1291,9 +1294,7 @@
 				47D4D06C228E964400A8B840 /* NSString+Empty.m in Sources */,
 				47F1EE0022926BAB0037591D /* aw_rtmp.c in Sources */,
 				47F1EDF822926BAB0037591D /* aw_sw_faac_encoder.c in Sources */,
-				47D4D078228E964400A8B840 /* UIControl+UIControl_buttonCon.m in Sources */,
 				47F1EDFC22926BAB0037591D /* aw_data.c in Sources */,
-				47D4D079228E964400A8B840 /* UIButton+touch.m in Sources */,
 				47D4D05F228E964400A8B840 /* UrlLabel.m in Sources */,
 				47D4D074228E964400A8B840 /* NSBundle+Language.m in Sources */,
 				47D4D062228E964400A8B840 /* UIImage+LXExtension.m in Sources */,
@@ -1320,6 +1321,7 @@
 				47D4D07C228E964400A8B840 /* ZCommonUtils.m in Sources */,
 				47E8EE4F228E4DD3005407D4 /* AppDelegate.m in Sources */,
 				47D4D069228E964400A8B840 /* NSString+Find.m in Sources */,
+				4709E7D22293E1EB00185D92 /* UIButton+EventInterval.m in Sources */,
 				47F1EDA02292564E0037591D /* FFmpegConverOC.m in Sources */,
 				47D4D075228E964400A8B840 /* TTButtonExtend.m in Sources */,
 				47F1EDF722926BAB0037591D /* aw_sw_x264_encoder.c in Sources */,
